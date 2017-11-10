@@ -8,6 +8,11 @@ class Todo extends React.Component{
     this.state={
       complete: false
     }
+    this.handleDeleteClick = this.handleDeleteClick.bind(this)
+  }
+
+  handleDeleteClick(e){
+      this.props.del(this.props.task)
   }
 
   handleClick(e){
@@ -25,8 +30,8 @@ render(){
     !this.state.complete ?
     <div>
       <li>{this.props.task}
-
-        <button onClick={ (event)=> this.handleClick(event) }>complete</button>
+        <button onClick={ this.handleDeleteClick }>Delete</button>
+        <button onClick={ (event)=> this.handleClick(event) }>Complete</button>
       </li>
       <br></br>
       mission not complete

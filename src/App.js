@@ -14,6 +14,10 @@ class App extends React.Component {
       tasks: ["first", "second", "third"],
       input: ''
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
 
@@ -34,22 +38,29 @@ class App extends React.Component {
 
   }
 
-
-
-
+  handleDelete(e){
+     console.log(e);
+     console.log(this.state);
+     this.setState({
+         tasks: this.state.tasks.filter((task) => task !== e)
+     })
+  }
 
   render() {
-
-    let tasks = this.state.tasks.map((task)=>
-      <Todo task={task} />
+    let tasks = this.state.tasks.map((task, index)=>
+      <Todo task={task} key={index} del={this.handleDelete}/>
     )
+
     return (
       <div>
 
-        <form onSubmit={(event)=> this.handleSubmit(event)}>
+        {/*<form onSubmit={(event)=> this.handleSubmit(event)}>*/}
+        <form onSubmit={this.handleSubmit} >
 
-          <input onChange={(event)=>this.handleChange(event)} />
+          {/*<input onChange={(event)=>this.handleChange(event)} />*/}
+          <input onChange={this.handleChange} />
           <input type="submit"/>
+
         </form>
 
         { tasks }
